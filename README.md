@@ -5,7 +5,7 @@ Open `.textile` files in **Source** with syntax highlighting, then switch to **P
 ## Install and use
 
 1. Enable plugins in **Settings → Plugins**.
-2. Run `orca plugin install Ruchkung/orca-textile@v0.1.0` and follow the approval instructions from Orca.
+2. Run `orca plugin install Ruchkung/orca-textile@v0.1.1` and follow the approval instructions from Orca.
 3. Open a `.textile` file and switch between **Source** and **Preview**.
 
 Preview renders Textile headings, lists, tables, emphasis, links, and code blocks locally. It supports hexadecimal text colors and shows image names or descriptions as text. Redmine-specific macros and references such as `{{toc}}` and `[[Wiki]]` need Redmine to resolve.
