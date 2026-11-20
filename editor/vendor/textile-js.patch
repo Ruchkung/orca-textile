@@ -1,0 +1,12 @@
+--- a/src/textile/flow.js
++++ b/src/textile/flow.js
+@@ -39,2 +39,4 @@
+ const reBlockNormal = re.compile(/^(.*?)($|\r?\n(?=[:txlisthd:])|\r?\n(?:\s*\n|$)+)/, 's');
++// Redmine allows a table to start directly after a paragraph.
++const reParagraph = re.compile(/^(.*?)($|\r?\n(?=[:txlisthd:]|(?:[:txattr:]\.[ \t]*)?\|[^\r\n]*\|[ \t]*(?:\r?\n|$))|\r?\n(?:\s*\n|$)+)/, 's');
+ const reBlockExtended = re.compile(/^(.*?)($|\r?\n(?=[:txlisthd:])|\r?\n+(?=[:txblocks:][:txattr:]\.))/, 's');
+@@ -292,3 +294,3 @@
+     // paragraph
+-    m = reBlockNormal.exec(src);
++    m = reParagraph.exec(src);
+     list.merge(paragraph(m[1], 'p', undefined, '\n', options));

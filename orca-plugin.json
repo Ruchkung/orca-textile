@@ -1,0 +1,35 @@
+{
+  "manifestVersion": 2,
+  "id": "textile",
+  "name": "Textile",
+  "version": "0.1.0",
+  "description": "Syntax highlighting and formatted previews for Textile files.",
+  "license": "MIT",
+  "repository": "https://github.com/Ruchkung/orca-textile",
+  "engines": {
+    "orca": ">=1.4.248"
+  },
+  "execution": "sandboxed-ui",
+  "pluginApi": 1,
+  "contributes": {
+    "syntaxes": [
+      {
+        "id": "textile",
+        "title": "Textile",
+        "scopeName": "text.textile",
+        "path": "syntaxes/textile.tmLanguage.json",
+        "extensions": [".textile"]
+      }
+    ],
+    "customEditors": [
+      {
+        "id": "textile-preview",
+        "title": "Preview",
+        "extensions": [".textile"],
+        "entry": "editor/index.html",
+        "priority": "option",
+        "frame": "isolated"
+      }
+    ]
+  }
+}

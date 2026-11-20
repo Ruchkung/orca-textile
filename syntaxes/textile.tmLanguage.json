@@ -1,0 +1,77 @@
+{
+  "name": "Textile",
+  "scopeName": "text.textile",
+  "patterns": [
+    {
+      "name": "markup.raw.block.textile",
+      "begin": "^(\\s*)(bc|pre)\\.(?=\\s)",
+      "end": "^\\s*$",
+      "beginCaptures": {
+        "2": { "name": "keyword.other.textile" }
+      }
+    },
+    {
+      "name": "markup.raw.block.textile",
+      "begin": "^(\\s*)(bc|pre)\\.\\.(?=\\s)",
+      "end": "(?=^\\s*(?:h[1-6]|p|bq|bc|pre|notextile|fn\\d+)\\.\\.?(?:\\s|$))",
+      "beginCaptures": {
+        "2": { "name": "keyword.other.textile" }
+      }
+    },
+    {
+      "name": "markup.heading.textile",
+      "begin": "^\\s*(h[1-6](?:\\([^)]*\\)|\\{[^}]*\\}|\\[[^\\]]*\\])*\\.)(?=\\s)",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.heading.textile" }
+      },
+      "patterns": [{ "include": "#inline" }]
+    },
+    {
+      "match": "^\\s*(?:p|bq|bc|pre|notextile|table|fn\\d+)(?:\\([^)]*\\)|\\{[^}]*\\}|\\[[^\\]]*\\])*\\.\\.?(?=\\s|$)",
+      "name": "keyword.other.textile"
+    },
+    {
+      "match": "^\\s*(?:[*#]+)(?=\\s)",
+      "name": "punctuation.definition.list.textile"
+    },
+    {
+      "name": "meta.table.textile",
+      "begin": "^\\s*(\\|)",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.separator.table.textile" }
+      },
+      "patterns": [
+        { "match": "\\|", "name": "punctuation.separator.table.textile" },
+        { "match": "(?<=\\|)_\\.(?=\\s)", "name": "markup.heading.table.textile" },
+        { "include": "#inline" }
+      ]
+    },
+    { "include": "#inline" }
+  ],
+  "repository": {
+    "inline": {
+      "patterns": [
+        { "match": "@[^@\\r\\n]+@", "name": "markup.raw.inline.textile" },
+        { "match": "<notextile>.*?</notextile>", "name": "markup.raw.inline.textile" },
+        { "match": "\\{\\{[^}\\r\\n]+\\}\\}", "name": "support.function.macro.textile" },
+        { "match": "\\[\\[[^\\]\\r\\n]+\\]\\]", "name": "markup.underline.link.wiki.textile" },
+        {
+          "match": "(\"[^\"\\r\\n]+\"):([^\\s|<>]+)",
+          "captures": {
+            "1": { "name": "string.other.link.title.textile" },
+            "2": { "name": "markup.underline.link.textile" }
+          }
+        },
+        { "match": "![^!\\r\\n]+!", "name": "markup.underline.link.image.textile" },
+        { "match": "(?<![\\p{L}\\p{N}*])\\*{1,2}(?=\\S).+?(?<=\\S)\\*{1,2}(?![\\p{L}\\p{N}*])", "name": "markup.bold.textile" },
+        { "match": "(?<![\\p{L}\\p{N}_])_{1,2}(?=\\S).+?(?<=\\S)_{1,2}(?![\\p{L}\\p{N}_])", "name": "markup.italic.textile" },
+        { "match": "(?<![\\p{L}\\p{N}])-\\S(?:.*?\\S)?-(?![\\p{L}\\p{N}])", "name": "markup.strikethrough.textile" },
+        { "match": "(?<![\\p{L}\\p{N}])\\+\\S(?:.*?\\S)?\\+(?![\\p{L}\\p{N}])", "name": "markup.underline.textile" },
+        { "match": "%\\{[^}]+\\}", "name": "entity.other.attribute-name.textile" },
+        { "match": "&(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]+);", "name": "constant.character.entity.textile" }
+      ]
+    }
+  }
+}
